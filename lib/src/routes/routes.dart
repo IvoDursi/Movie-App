@@ -7,6 +7,8 @@ import 'package:movie/src/collectionpages/crearrecuerdostore.dart';
 import 'package:movie/src/collectionpages/detallepriv.dart';
 import 'package:movie/src/collectionpages/recuerdos_store.dart';
 import 'package:movie/src/collectionpages/visited_page.dart';
+import 'package:movie/src/login/login_page.dart';
+import 'package:movie/src/login/registro_page.dart';
 import 'package:movie/src/milista_pages/agregarlista.dart';
 import 'package:movie/src/milista_pages/milista_page.dart';
 import 'package:movie/src/pages/home_page.dart';
@@ -30,5 +32,7 @@ Map<String,WidgetBuilder> rutas(){
     "agregarecuerdostore": (BuildContext context) => CrearRecuerdoStore(),
     "recuerdosInicio": (BuildContext context) => Recuerdos(),
     "agregarecuerdo": (BuildContext context) => AgregarRecuerdo(),
+    "login": (BuildContext context) => LoginPage(),
+    "registro": (BuildContext context) => RegistroPage()
   };
 }

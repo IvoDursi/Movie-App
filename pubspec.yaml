@@ -37,6 +37,8 @@ dependencies:
   font_awesome_flutter:
   provider: ^5.0.0
   animate_do: ^2.0.0
+  shared_preferences:
+  rxdart: ^0.26.0
 
 
 
