@@ -6,15 +6,17 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:movie/src/modelo/stores_model.dart';
+import 'package:movie/src/preferencias/prefs_usuario.dart';
 
 
 class StoreProvider{//El puente entre el firebase y mi app
 
   final String _url = "https://peliculas-17b36-default-rtdb.firebaseio.com/";
+  final _prefs = new PreferenciasUsuario();
 
   Future<bool> crearStore(Store store) async{
 
-    final url = "$_url/store.json";
+    final url = "$_url/store.json?auth=${_prefs.token}";
 
     final resp = await http.post(Uri.parse(url), body: storeToJson(store));
 
@@ -28,7 +30,7 @@ class StoreProvider{//El puente entre el firebase y mi app
 
   Future<List<Store>> cargarStore()async{//Retornar una lista de la informacion de la base de datos
 
-    final url = "$_url/store.json";//URL del json de la informacion
+    final url = "$_url/store.json?auth=${_prefs.token}";//URL del json de la informacion
     final resp = await http.get(Uri.parse(url));//El get del http
 
     final Map<String, dynamic> decodedData = json.decode(resp.body);
@@ -52,7 +54,7 @@ class StoreProvider{//El puente entre el firebase y mi app
 
   Future<bool> editarStore(Store store) async{
 
-    final url = "$_url/store/${store.id}.json";
+    final url = "$_url/store/${store.id}.json?auth=${_prefs.token}";
 
     final resp = await http.put(Uri.parse(url), body: storeToJson(store));//El put es para editar/remplazar el elemento
 
@@ -64,7 +66,7 @@ class StoreProvider{//El puente entre el firebase y mi app
   }
 
   Future<int> borrarStore (String id) async{//Metodo para borrar un producto en la app y en la base de datos
-    final url = "$_url/stores/$id.json";
+    final url = "$_url/stores/$id.json?auth=${_prefs.token}";
     final resp = await http.delete(Uri.parse(url)); //EL DELETE
 
     return 1;

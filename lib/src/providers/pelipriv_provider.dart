@@ -6,12 +6,14 @@ import 'package:mime_type/mime_type.dart';
 import 'package:movie/src/modelo/actores_model.dart';
 import 'package:movie/src/modelo/peliculapriv_modelo.dart';
 import 'package:http/http.dart' as http;
+import 'package:movie/src/preferencias/prefs_usuario.dart';
 
 class PeliculasPrivProvider{//El puente entre el firebase y mi app
 
   final String _url = "https://peliculas-17b36-default-rtdb.firebaseio.com/";
   String _apikey   = "b8e76ae046a4619c9751f5d3f617d923";//MI APIKEY
   String _lenguaje = "es-ES";
+  final _prefs = new PreferenciasUsuario();
 
   Future<bool> crearPelicula(PeliculasPriv peli) async{
 
@@ -29,7 +31,7 @@ class PeliculasPrivProvider{//El puente entre el firebase y mi app
 
   Future<List<PeliculasPriv>> cargarPelicula()async{//Retornar una lista de la informacion de la base de datos
 
-    final url = "$_url/peli.json";//URL del json de la informacion
+    final url = "$_url/peli.json?auth=${_prefs.token}";//URL del json de la informacion
     final resp = await http.get(Uri.parse(url));//El get del http
 
     final Map<String, dynamic> decodedData = json.decode(resp.body);
@@ -53,7 +55,7 @@ class PeliculasPrivProvider{//El puente entre el firebase y mi app
 
   Future<bool> editarPelicula(PeliculasPriv peli) async{
 
-    final url = "$_url/peliculas/${peli.id}.json";
+    final url = "$_url/peliculas/${peli.id}.json?auth=${_prefs.token}";
 
     final resp = await http.put(Uri.parse(url), body: peliculasToJson(peli));//El put es para editar/remplazar el elemento
 

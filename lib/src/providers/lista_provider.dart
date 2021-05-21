@@ -2,14 +2,16 @@ import 'dart:convert';
 
 import 'package:movie/src/modelo/lista_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:movie/src/preferencias/prefs_usuario.dart';
 
 class ListaProvider{//El puente entre el firebase y mi app
 
   final String _url = "https://peliculas-17b36-default-rtdb.firebaseio.com/";
+  final _prefs = new PreferenciasUsuario();
 
   Future<bool> crearLista(Lista lista) async{
 
-    final url = "$_url/lista.json";
+    final url = "$_url/lista.json?auth=${_prefs.token}";
 
     final resp = await http.post(Uri.parse(url), body: listaToJson(lista));
 
@@ -23,7 +25,7 @@ class ListaProvider{//El puente entre el firebase y mi app
 
   Future<List<Lista>> cargarLista()async{//Retornar una lista de la informacion de la base de datos
 
-    final url = "$_url/lista.json";//URL del json de la informacion
+    final url = "$_url/lista.json?auth=${_prefs.token}";//URL del json de la informacion
     final resp = await http.get(Uri.parse(url));//El get del http
 
     final Map<String, dynamic> decodedData = json.decode(resp.body);
@@ -46,7 +48,7 @@ class ListaProvider{//El puente entre el firebase y mi app
   }
 
   Future<int> borrarLista (String id) async{//Metodo para borrar un producto en la app y en la base de datos
-    final url = "$_url/lista/$id.json";
+    final url = "$_url/lista/$id.json?auth=${_prefs.token}";
     final resp = await http.delete(Uri.parse(url)); //EL DELETE
 
     return 1;

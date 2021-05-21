@@ -40,7 +40,7 @@ class LoginPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 50.0),
             margin: EdgeInsets.symmetric(vertical:20.0),
             decoration: BoxDecoration(
-              color: Colors.black54,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(5.0),
               boxShadow: [
                 BoxShadow(//TEMAS DE LA SOMBRA DE LA CAJA
@@ -53,7 +53,7 @@ class LoginPage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Text("Login", style: TextStyle(fontSize: 20.0,color: Colors.white)),
+                Text("Login", style: TextStyle(fontSize: 20.0,color: Colors.black87)),
                 SizedBox(height: 60.0),
                 _crearEmail(bloc),
                 SizedBox(height: 30.0),
@@ -83,7 +83,7 @@ class LoginPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal:20.0),
 
           child: TextField(
-            cursorColor: Colors.white,
+            cursorColor: Colors.red[900],
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               icon: Icon(Icons.alternate_email, color: Colors.redAccent[700]),
@@ -107,6 +107,7 @@ class LoginPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal:20.0),
           child: TextField(
             obscureText: true,
+            cursorColor: Colors.red[900],
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               icon: Icon(Icons.lock_outline, color: Colors.redAccent[700]),

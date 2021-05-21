@@ -39,7 +39,7 @@ class RegistroPage extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 50.0),
             margin: EdgeInsets.symmetric(vertical:20.0),
             decoration: BoxDecoration(
-              color: Colors.black54,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(5.0),
               boxShadow: [
                 BoxShadow(//TEMAS DE LA SOMBRA DE LA CAJA
@@ -52,7 +52,7 @@ class RegistroPage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Text("Register", style: TextStyle(fontSize: 20.0, color: Colors.white)),
+                Text("Register", style: TextStyle(fontSize: 20.0, color: Colors.black87)),
                 SizedBox(height: 60.0),
                 _crearEmail(bloc),
                 SizedBox(height: 30.0),

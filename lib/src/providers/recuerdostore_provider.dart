@@ -4,14 +4,16 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:movie/src/modelo/recuerdostore_model.dart';
+import 'package:movie/src/preferencias/prefs_usuario.dart';
 
 class RecuerdoStoreProvider{//El puente entre el firebase y mi app
 
   final String _url = "https://peliculas-17b36-default-rtdb.firebaseio.com/";
+  final _prefs = new PreferenciasUsuario();
   
   Future<bool> crearRecuerdo(RecuerdoStore recuerdoS) async{
 
-    final url = "$_url/recuerdoS.json";
+    final url = "$_url/recuerdoS.json?auth=${_prefs.token}";
 
     final resp = await http.post(Uri.parse(url), body: recuerdoStoreToJson(recuerdoS));
 
@@ -24,7 +26,7 @@ class RecuerdoStoreProvider{//El puente entre el firebase y mi app
 
   Future<List<RecuerdoStore>> cargarRecuerdoStore()async{//Retornar una lista de la informacion de la base de datos
 
-    final url = "$_url/recuerdoS.json";//URL del json de la informacion
+    final url = "$_url/recuerdoS.json?auth=${_prefs.token}";//URL del json de la informacion
     final resp = await http.get(Uri.parse(url));//El get del http
 
     final Map<String, dynamic> decodedData = json.decode(resp.body);
@@ -77,7 +79,7 @@ class RecuerdoStoreProvider{//El puente entre el firebase y mi app
 
   Future<bool> editarRecuerdoStore(RecuerdoStore recuerdo) async{
 
-    final url = "$_url/recuerdoS/${recuerdo.id}.json";
+    final url = "$_url/recuerdoS/${recuerdo.id}.json?auth=${_prefs.token}";
 
     final resp = await http.put(Uri.parse(url), body: recuerdoStoreToJson(recuerdo));//El put es para editar/remplazar el elemento
 
@@ -89,7 +91,7 @@ class RecuerdoStoreProvider{//El puente entre el firebase y mi app
   }
 
   Future<int> borrarRecuerdo (String id) async{//Metodo para borrar un producto en la app y en la base de datos
-    final url = "$_url/recuerdoS/$id.json";
+    final url = "$_url/recuerdoS/$id.json?auth=${_prefs.token}";
     final resp = await http.delete(Uri.parse(url)); //EL DELETE
 
     return 1;

@@ -4,14 +4,16 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:movie/src/modelo/recuerdoinicio_model.dart';
+import 'package:movie/src/preferencias/prefs_usuario.dart';
 
 class RecuerdoInicioProvider{//El puente entre el firebase y mi app
 
   final String _url = "https://peliculas-17b36-default-rtdb.firebaseio.com/";
+  final _prefs = PreferenciasUsuario();
 
   Future<bool> crearRecuerdo(RecuerdoInicio recuerdoI) async{
 
-    final url = "$_url/recuerdoI.json";
+    final url = "$_url/recuerdoI.json?auth=${_prefs.token}";
 
     final resp = await http.post(Uri.parse(url), body: recuerdoInicioToJson(recuerdoI));
 
@@ -53,7 +55,7 @@ class RecuerdoInicioProvider{//El puente entre el firebase y mi app
 
   Future<bool> editarRecuerdoInicio(RecuerdoInicio recuerdo) async{
 
-    final url = "$_url/store/${recuerdo.id}.json";
+    final url = "$_url/store/${recuerdo.id}.json?auth=${_prefs.token}";
 
     final resp = await http.put(Uri.parse(url), body: recuerdoInicioToJson(recuerdo));//El put es para editar/remplazar el elemento
 
@@ -66,7 +68,7 @@ class RecuerdoInicioProvider{//El puente entre el firebase y mi app
 
   Future<List<RecuerdoInicio>> cargarRecuerdoInicio()async{//Retornar una lista de la informacion de la base de datos
 
-    final url = "$_url/recuerdoI.json";//URL del json de la informacion
+    final url = "$_url/recuerdoI.json?auth=${_prefs.token}";//URL del json de la informacion
     final resp = await http.get(Uri.parse(url));//El get del http
 
     final Map<String, dynamic> decodedData = json.decode(resp.body);
@@ -89,7 +91,7 @@ class RecuerdoInicioProvider{//El puente entre el firebase y mi app
   }
 
   Future<int> borrarRecuerdo (String id) async{//Metodo para borrar un producto en la app y en la base de datos
-    final url = "$_url/recuerdoI/$id.json";
+    final url = "$_url/recuerdoI/$id.json?auth=${_prefs.token}";
     final resp = await http.delete(Uri.parse(url)); //EL DELETE
 
     return 1;
