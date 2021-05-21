@@ -4,6 +4,7 @@ import 'package:movie/src/collectionpages/coleccion.dart';
 import 'package:movie/src/milista_pages/milista_page.dart';
 import 'package:movie/src/providers/recuerdosinicio_provider.dart';
 import 'package:movie/src/subpagerecuerdos.dart/recuerdo.dart';
+import 'package:movie/src/widgets/fondo_app_widget.dart';
 import 'package:movie/src/widgets/recuerdos_swipe.dart';
 
 class Inicio extends StatefulWidget {
@@ -22,7 +23,7 @@ class _InicioState extends State<Inicio> {
     return Scaffold(
       body: Stack(
         children: [
-          fondoapp(),
+          FondoApp(color: Colors.black),
           CustomScrollView(
             physics: BouncingScrollPhysics(),
             slivers: <Widget>[
@@ -41,6 +42,7 @@ class _InicioState extends State<Inicio> {
           )
         ],
       ),
+      endDrawerEnableOpenDragGesture:false,
     );
   }
 
@@ -241,13 +243,4 @@ class _InicioState extends State<Inicio> {
       ]
     );
   }
-
-  fondoapp(){
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      color: Colors.black,
-    );
-  }
-
 }

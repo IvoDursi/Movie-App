@@ -68,6 +68,7 @@ class StoreProvider{//El puente entre el firebase y mi app
   Future<int> borrarStore (String id) async{//Metodo para borrar un producto en la app y en la base de datos
     final url = "$_url/stores/$id.json?auth=${_prefs.token}";
     final resp = await http.delete(Uri.parse(url)); //EL DELETE
+    print(json.decode(resp.body));
 
     return 1;
   }

@@ -35,4 +35,15 @@ class PreferenciasUsuario {
     _prefs.setString('ultimaPagina', value);
   }
 
+  _saveValue(String token) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('token', token);
+  }
+
+  Future<String> _returnValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = await prefs.getString("token");
+    return token;
+  }
+
 }

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/src/modelo/recuerdoinicio_model.dart';
 import 'package:movie/src/providers/recuerdosinicio_provider.dart';
@@ -42,6 +43,7 @@ class _RecuerdosState extends State<Recuerdos> {
           final store = snapshot.data;
 
           return ListView.builder(
+            physics: BouncingScrollPhysics(),
             itemCount: store.length,
             itemBuilder: (context, i) => _crearItem(context, store[i] ),
           );
@@ -55,52 +57,54 @@ class _RecuerdosState extends State<Recuerdos> {
 
   Widget _crearItem(BuildContext context, RecuerdoInicio recuerdoInicio) {
     final recuerdoInicioProvider = RecuerdoInicioProvider();
-    return GestureDetector(
-      key: UniqueKey(),
-              onLongPress: (){
-          showDialog(context: context , builder: (context) => AlertDialog(
-            title: Text("Deseas eliminar el recuerdo?"),
-            elevation: 0,
-            actions: [
-              // ignore: deprecated_member_use
-              FlatButton(onPressed: (){
-                setState(() {
-                  
-                });
-                recuerdoInicioProvider.borrarRecuerdo(recuerdoInicio.id);
-                Navigator.pop(context);
-              }, child: Text("Ok", style: TextStyle(color: Colors.redAccent[700]),)),
-              // ignore: deprecated_member_use
-              FlatButton(onPressed: (){
-                Navigator.pop(context);
-              }, child: Text("Cancel",style: TextStyle(color: Colors.black)))
-            ],
-          ));
-      },
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(50),
-          child: Card(
-            color: Colors.black38,
-            margin: EdgeInsets.symmetric(horizontal:16,vertical:12),
-            child: Column(
-            children: <Widget>[
-              ( recuerdoInicio.foto == null ) 
-                ? Image(image: AssetImage('assets/img/sinimagen.png'))
-                : Image(
-                  image: NetworkImage( recuerdoInicio.foto ),
-                  height: 220.0,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+    return FadeInUp(
+      child: GestureDetector(
+        key: UniqueKey(),
+                onLongPress: (){
+            showDialog(context: context , builder: (context) => AlertDialog(
+              title: Text("Deseas eliminar el recuerdo?"),
+              elevation: 0,
+              actions: [
+                // ignore: deprecated_member_use
+                FlatButton(onPressed: (){
+                  setState(() {
+                    
+                  });
+                  recuerdoInicioProvider.borrarRecuerdo(recuerdoInicio.id);
+                  Navigator.pop(context);
+                }, child: Text("Ok", style: TextStyle(color: Colors.redAccent[700]),)),
+                // ignore: deprecated_member_use
+                FlatButton(onPressed: (){
+                  Navigator.pop(context);
+                }, child: Text("Cancel",style: TextStyle(color: Colors.black)))
+              ],
+            ));
+        },
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(50),
+            child: Card(
+              color: Colors.black38,
+              margin: EdgeInsets.symmetric(horizontal:16,vertical:12),
+              child: Column(
+              children: <Widget>[
+                ( recuerdoInicio.foto == null ) 
+                  ? Image(image: AssetImage('assets/img/sinimagen.png'))
+                  : Image(
+                    image: NetworkImage( recuerdoInicio.foto ),
+                    height: 220.0,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                
+                ListTile(
+                  title: Text('${ recuerdoInicio.descripcion }', style: TextStyle(color: Colors.white, fontSize: 20)),
                 ),
-              
-              ListTile(
-                title: Text('${ recuerdoInicio.descripcion }', style: TextStyle(color: Colors.white, fontSize: 20)),
-              ),
 
-            ],
+              ],
+            ),
           ),
-        ),
-      )
+        )
+      ),
     );
   }
 

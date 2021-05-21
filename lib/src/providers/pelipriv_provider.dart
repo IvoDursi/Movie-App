@@ -17,7 +17,7 @@ class PeliculasPrivProvider{//El puente entre el firebase y mi app
 
   Future<bool> crearPelicula(PeliculasPriv peli) async{
 
-    final url = "$_url/peli.json";
+    final url = "$_url/peli.json?auth=${_prefs.token}";
 
     final resp = await http.post(Uri.parse(url), body: peliculasToJson(peli));
 
@@ -69,7 +69,7 @@ class PeliculasPrivProvider{//El puente entre el firebase y mi app
   Future<int> borrarPelicula (String id) async{//Metodo para borrar un producto en la app y en la base de datos
     final url = "$_url/peli/$id.json";
     final resp = await http.delete(Uri.parse(url)); //EL DELETE
-
+    print(json.decode(resp.body));
     return 1;
   }
 

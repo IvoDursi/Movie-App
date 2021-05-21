@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
       child: Column(
         children: [
           SafeArea(child: Container(
-            height: size.width * 0.6
+            height: size.width * 0.45
           )),
           Bounce(
             duration: Duration(seconds: 1),
@@ -137,7 +137,7 @@ class LoginPage extends StatelessWidget {
           color: Colors.red,
           child: Container(
             padding: EdgeInsets.symmetric(horizontal:60.0, vertical: 14),
-            child: Text("Ingresar",style: TextStyle(color: Colors.white),)
+            child: Text("Login",style: TextStyle(color: Colors.white),)
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0)

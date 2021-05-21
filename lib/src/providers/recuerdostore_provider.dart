@@ -93,6 +93,7 @@ class RecuerdoStoreProvider{//El puente entre el firebase y mi app
   Future<int> borrarRecuerdo (String id) async{//Metodo para borrar un producto en la app y en la base de datos
     final url = "$_url/recuerdoS/$id.json?auth=${_prefs.token}";
     final resp = await http.delete(Uri.parse(url)); //EL DELETE
+    print(json.decode(resp.body));
 
     return 1;
   }

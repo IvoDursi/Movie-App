@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie/src/bloc/login_bloc.dart';
+import 'package:movie/src/pages/home_page.dart';
 import 'package:movie/src/preferencias/prefs_usuario.dart';
 import 'package:movie/src/providers/todasinfo.dart';
 import 'package:movie/src/providers/usuario_provider.dart';
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => TodasInfo()),
         ChangeNotifierProvider(create: (context) => LoginBloc()),
-        ChangeNotifierProvider(create: (context) => UsuarioProvider())
+        ChangeNotifierProvider(create: (context) => UsuarioProvider()),
+        ChangeNotifierProvider(create: (context) => NavegacionModel()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
