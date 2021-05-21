@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie/src/bloc/login_bloc.dart';
@@ -35,32 +36,36 @@ class RegistroPage extends StatelessWidget {
           SafeArea(child: Container(
             height: size.width * 0.6
           )),
-          Container(
-            width: size.width * 0.85,
-            padding: EdgeInsets.symmetric(vertical: 50.0),
-            margin: EdgeInsets.symmetric(vertical:20.0),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(5.0),
-              boxShadow: [
-                BoxShadow(//TEMAS DE LA SOMBRA DE LA CAJA
-                  color: Colors.black38,
-                  blurRadius: 3.0,
-                  offset: Offset(0.0, 5.0),
-                  spreadRadius: 3.0
-                )
-              ]
-            ),
-            child: Column(
-              children: [
-                Text("Register", style: TextStyle(fontSize: 20.0, color: Colors.black87)),
-                SizedBox(height: 60.0),
-                _crearEmail(bloc),
-                SizedBox(height: 30.0),
-                _crearPassword(bloc),
-                SizedBox(height:60.0),
-                _crearBoton(bloc)
-              ]
+          Bounce(
+            duration: Duration(seconds: 1),
+            from: 8,
+            child: Container(
+              width: size.width * 0.85,
+              padding: EdgeInsets.symmetric(vertical: 50.0),
+              margin: EdgeInsets.symmetric(vertical:20.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(5.0),
+                boxShadow: [
+                  BoxShadow(//TEMAS DE LA SOMBRA DE LA CAJA
+                    color: Colors.black38,
+                    blurRadius: 3.0,
+                    offset: Offset(0.0, 5.0),
+                    spreadRadius: 3.0
+                  )
+                ]
+              ),
+              child: Column(
+                children: [
+                  Text("Register", style: TextStyle(fontSize: 20.0, color: Colors.black87)),
+                  SizedBox(height: 60.0),
+                  _crearEmail(bloc),
+                  SizedBox(height: 30.0),
+                  _crearPassword(bloc),
+                  SizedBox(height:60.0),
+                  _crearBoton(bloc)
+                ]
+              ),
             ),
           ),
           FlatButton(
@@ -191,7 +196,7 @@ class RegistroPage extends StatelessWidget {
       padding: EdgeInsets.only(top:50.0),
       child: Column(
         children: [
-          FaIcon(FontAwesomeIcons.tv, size: 100.0, color: Colors.black54,),
+          FaIcon(FontAwesomeIcons.user, size: 100.0, color: Colors.black54,),
           SizedBox(height: 10.0, width: double.infinity,),
           Text("Movie App", style: TextStyle(color: Colors.white,fontSize: 25, fontWeight: FontWeight.bold))        ],
       ),
