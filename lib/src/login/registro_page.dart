@@ -29,10 +29,11 @@ class RegistroPage extends StatelessWidget {
     final size = MediaQuery.of(context).size; //DIMENSIONES DEL TELEFONO
 
     return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
       child: Column(
         children: [
           SafeArea(child: Container(
-            height: 155.0
+            height: size.width * 0.6
           )),
           Container(
             width: size.width * 0.85,
@@ -85,8 +86,8 @@ class RegistroPage extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               icon: Icon(Icons.alternate_email, color: Colors.redAccent[700]),
-              hintText: "ejemplo@correo.com",
-              labelText: "Correo electrónico",
+              hintText: "Email",
+              labelText: "Email",
               errorText: snapshot.error
             ),
             onChanged: (value) => bloc.changeEmail(value)

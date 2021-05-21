@@ -104,7 +104,7 @@ class _MilistaState extends State<Milista> {
                 child: FadeInImage(
               image: NetworkImage(lista.getPosterImg()),
               placeholder: AssetImage("assets/img/no-image.jpg"),
-              height: _screenSize.height * 0.30,
+              height: _screenSize.height * 0.28,
               fit: BoxFit.cover,
               ),
              )
