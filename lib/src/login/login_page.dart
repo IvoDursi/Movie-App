@@ -89,7 +89,7 @@ class LoginPage extends StatelessWidget {
             decoration: InputDecoration(
               icon: Icon(Icons.alternate_email, color: Colors.redAccent[700]),
               hintText: "Email",
-              labelText: "xd",
+              labelText: "Email",
               errorText: snapshot.error
             ),
             onChanged: (value) => bloc.changeEmail(value),
