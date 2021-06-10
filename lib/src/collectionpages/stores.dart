@@ -64,9 +64,9 @@ class Stores extends StatelessWidget {
           child: Stack(
             children: [
               FadeInImage(image: AssetImage("assets/img/" + valor),
-              height: 250,
+              height: 260,
               placeholder: AssetImage("assets/img/sinimagen.png"),
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
               ),
               _texto(texto),
             ],

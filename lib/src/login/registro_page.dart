@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:movie/src/bloc/login_bloc.dart';
@@ -126,10 +127,6 @@ class RegistroPage extends StatelessWidget {
 
   Widget _crearBoton(LoginBloc bloc){
 
-    //formValidStream
-    //snapshot.hasData
-    ////true ? algo si true : algo si false
-
     return StreamBuilder(
       stream: bloc.formValidStream,
       builder: (BuildContext context, AsyncSnapshot snapshot){
@@ -151,12 +148,20 @@ class RegistroPage extends StatelessWidget {
   }
 
   _register(LoginBloc bloc, BuildContext context)async{
+
+    CollectionReference usuarios = FirebaseFirestore.instance.collection("users");//esta variable hace referencia a la coleccion en el cloud
+
     print ("Email: ${bloc.email} ");
     print ("Password: ${bloc.password}");
 
     final info = await usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
 
     if(info["ok"]){
+      usuarios.add({
+        "Email" : bloc.email,
+        "Password" : bloc.password
+      });
+
       Navigator.pushReplacementNamed(context, "home");
     } else {
       return mostrarAlerta(context, info["mensaje"]);

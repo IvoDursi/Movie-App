@@ -39,6 +39,9 @@ dependencies:
   animate_do: ^2.0.0
   shared_preferences:
   rxdart: ^0.26.0
+  firebase_core:
+  cloud_firestore: 
+
 
 
 

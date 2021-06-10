@@ -20,8 +20,6 @@ class PeliculasProvider{
 
   Function(List<Pelicula>) get popularesSink => _popularesStreamController.sink.add;//INTRODUCE A LA CORRIENTE
 
-
-
   Stream<List<Pelicula>> get popularesStream => _popularesStreamController.stream;
 
 

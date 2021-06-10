@@ -23,7 +23,7 @@ class UsuarioProvider with ChangeNotifier{//CREARCION DEL REGISTRO EN FIREBASE
 
     Map<String, dynamic> decodedResp = json.decode(resp.body);
 
-    print(decodedResp);
+    print(decodedResp["pelispriv"]);
 
     if(decodedResp.containsKey("idToken")){
       _prefs.token = decodedResp["idToken"];
